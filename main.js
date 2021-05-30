@@ -31,7 +31,6 @@ class HashTable {
         if (typeof key === 'string') {
             for (const hash in this.values) {
                 for (const item in this.values[hash]) {
-                    //console.log(this.values[hash][item]);
                     if (this.values[hash][item] === key) {
                         find[hash] = this.values[hash];
                     }
