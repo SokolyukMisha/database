@@ -1,4 +1,5 @@
-'use strict'
+'use strict';
+
 class HashTable {
     constructor() {
         this.values = {};
@@ -6,35 +7,43 @@ class HashTable {
         this.size =  0;
     }
 
-    new() {
-        this.size++;
-    }
-
-    add(key, value) {
-        const hash = this.size;
+    addOne(elem) {
+        const hash = ++this.size;
         if (!this.values.hasOwnProperty(hash)) {
             this.values[hash] = {};
         }
-        if (!this.values[hash].hasOwnProperty(key)) {
-            this.length++;
+        for (const key in elem) {
+            if (!this.values[hash].hasOwnProperty(key)) {
+                this.length++;
+            }
+            this.values[hash][key] = elem[key];
         }
-        this.values[hash][key] = value;
     }
 
+    addMany(arr) {
+        for(const item of arr) {
+            this.addOne(item);
+        }
+    }
+    
     search(key) {
         const find = {};
+        for (const hash in this.values) {
+            find[hash] = this.values[hash];
+        }
         if (typeof key === 'string') {
             for (const hash in this.values) {
-                if (this.values.hasOwnProperty(hash) && this.values[hash].hasOwnProperty(key)) {
-                    find[hash] = this.values[hash][key];
+                if (!this.values[hash].hasOwnProperty(key)) {
+                    delete find[hash];
                 }
             }
         }
         else if (typeof key === 'object') {
             for (const hash in this.values) {
-                for ( const keys in key) {
-                    if (this.values[hash][keys] != key[keys]) break;
-                    find[hash] = this.values[hash];
+                for (const keys in key) {
+                    if (this.values[hash][keys] !== key[keys]) {
+                        delete find[hash];
+                    }
                 }
             }
         }
@@ -42,11 +51,6 @@ class HashTable {
         return find;
     }
 
-    log(){
-        for (const hash in this.values){
-            console.log(this.values[hash]);
-        }
-    }
     change(hash, key, value) {
         if (!this.values.hasOwnProperty(hash)) {
             this.values[hash] = {};
