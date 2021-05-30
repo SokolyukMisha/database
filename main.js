@@ -28,21 +28,27 @@ class HashTable {
     
     search(key) {
         const find = {};
-        for (const hash in this.values) {
-            find[hash] = this.values[hash];
-        }
         if (typeof key === 'string') {
             for (const hash in this.values) {
-                if (!this.values[hash].hasOwnProperty(key)) {
-                    delete find[hash];
+                for (const item in this.values[hash]) {
+                    //console.log(this.values[hash][item]);
+                    if (this.values[hash][item] === key) {
+                        find[hash] = this.values[hash];
+                    }
                 }
             }
         }
         else if (typeof key === 'object') {
             for (const hash in this.values) {
+                find[hash] = this.values[hash];
+            }
+            for (const hash in this.values) {
                 for (const keys in key) {
-                    if (this.values[hash][keys] !== key[keys]) {
-                        delete find[hash];
+                    if (this.values[hash].hasOwnProperty(keys)) {
+                        if (this.values[hash][keys] !== key[keys]) {
+                            delete find[hash];
+                        }
+                    else return null;
                     }
                 }
             }
