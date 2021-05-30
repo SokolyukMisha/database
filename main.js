@@ -79,7 +79,7 @@ class HashTable {
   }
 
   remove(index) {
-    this.length = this.length - Object.keys(ht.values[index]).length;
+    this.length = this.length - Object.keys(this.values[index]).length;
     for (let i = index; i <= this.size; i++) {
       this.values[-i] = this.values[i];
     }
