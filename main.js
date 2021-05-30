@@ -117,7 +117,7 @@ class HashTable {
     }
   }
 
-  concatenation(obj) {
-    ht.addMany(Object.values(obj.values));
+  concatenation(obj1, obj2) {
+    obj1.addMany(Object.values(obj2.values));
   }
 }
