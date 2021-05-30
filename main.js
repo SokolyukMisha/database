@@ -91,6 +91,7 @@ class HashTable {
                     this.values[j + 1] = temp;
                 }
             }
+
         }
         if(reverse) {
             for (let i = 1, end = Object.keys(this.values).length; i <= end / 2; i++) {
