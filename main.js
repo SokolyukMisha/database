@@ -93,4 +93,17 @@ class HashTable {
             }
         }
     }
+    ReverseSort(key) {
+        let temp;
+        for (let i = 0; i < Object.keys(this.values).length - 1; i++) {
+            for (let j = 1; j < Object.keys(this.values).length - i; j++) {
+                if (this.values[j][key] < this.values[j + 1][key]) {
+                    temp = this.values[j];
+                    this.values[j] = this.values[j + 1];
+                    this.values[j + 1] = temp;
+                }
+            }
+
+        }
+    }
 }
