@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 class HashTable {
   constructor() {
@@ -28,7 +28,7 @@ class HashTable {
 
   searchByValue(value) {
     const find = {};
-    if (typeof value === "string") {
+    if (typeof value === 'string') {
       for (const hash in this.values) {
         for (const item in this.values[hash]) {
           if (this.values[hash][item] === value) {
@@ -36,7 +36,7 @@ class HashTable {
           }
         }
       }
-    } else if (typeof value === "object") {
+    } else if (typeof value === 'object') {
       for (const hash in this.values) {
         find[hash] = this.values[hash];
       }
@@ -59,7 +59,7 @@ class HashTable {
     for (const hash in this.values) {
       if (
         this.values.hasOwnProperty(hash) &&
-        this.values[hash].hasOwnProperty(key)
+                this.values[hash].hasOwnProperty(key)
       ) {
         find[hash] = this.values[hash][key];
       }
@@ -79,7 +79,7 @@ class HashTable {
   }
 
   remove(index) {
-    this.length = this.length - Object.keys(this.values[index]).length;
+    this.length -= Object.keys(this.values[index]).length;
     for (let i = index; i <= this.size; i++) {
       this.values[-i] = this.values[i];
     }
@@ -117,7 +117,7 @@ class HashTable {
     }
   }
 
-  concatenation(obj1, obj2) {
-    obj1.addMany(Object.values(obj2.values));
+  concatenation(obj) {
+    this.addMany(Object.values(obj.values));
   }
 }
