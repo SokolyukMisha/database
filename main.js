@@ -9,11 +9,12 @@ class HashTable {
 
   addOne(elem) {
     const hash = ++this.size;
-    if (!this.values.hasOwnProperty(hash)) {
+    const has = Object.prototype.hasOwnProperty;
+    if (!has.call(this.values, hash)) {
       this.values[hash] = {};
     }
     for (const key in elem) {
-      if (!this.values[hash].hasOwnProperty(key)) {
+      if (!has.call(this.values[hash], key)) {
         this.length++;
       }
       this.values[hash][key] = elem[key];
@@ -42,7 +43,8 @@ class HashTable {
       }
       for (const hash in this.values) {
         for (const keys in value) {
-          if (this.values[hash].hasOwnProperty(keys)) {
+          const has = Object.prototype.hasOwnProperty;
+          if (has.call(this.values[hash], keys)) {
             if (this.values[hash][keys] !== value[keys]) {
               delete find[hash];
             }
@@ -57,10 +59,8 @@ class HashTable {
   searchByKey(key) {
     const find = {};
     for (const hash in this.values) {
-      if (
-        this.values.hasOwnProperty(hash) &&
-                this.values[hash].hasOwnProperty(key)
-      ) {
+      const has = Object.prototype.hasOwnProperty;
+      if (has.call(this.values, hash) && has.call(this.values[hash], key)) {
         find[hash] = this.values[hash][key];
       }
     }
@@ -69,10 +69,11 @@ class HashTable {
   }
 
   change(hash, key, value) {
-    if (!this.values.hasOwnProperty(hash)) {
+    const has = Object.prototype.hasOwnProperty;
+    if (!has.call(this.values, hash)) {
       this.values[hash] = {};
     }
-    if (!this.values[hash].hasOwnProperty(key)) {
+    if (!has.call(this.values[hash], key)) {
       this.length++;
     }
     this.values[hash][key] = value;
