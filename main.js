@@ -50,7 +50,7 @@ class HashTable {
         }
       }
     }
-    if (Object.keys(find).length == 0) return null;
+    if (Object.keys(find).length === 0) return null;
     return find;
   }
 
@@ -64,7 +64,7 @@ class HashTable {
         find[hash] = this.values[hash][key];
       }
     }
-    if (Object.keys(find).length == 0) return null;
+    if (Object.keys(find).length === 0) return null;
     return find;
   }
 
