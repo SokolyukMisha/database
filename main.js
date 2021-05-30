@@ -100,11 +100,8 @@ class HashTable {
             }
         }
     }
-    concat (hashtable){
-        const arr = [];
-        for (const hash in hashtable.values) {
-            arr.push(hashtable.values[hash]);
-        }
-        ht.addMany(arr);
+    
+   concatenation (obj){
+        ht.addMany(Object.values(obj.values));
     }
 }
