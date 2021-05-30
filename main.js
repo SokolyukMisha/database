@@ -81,7 +81,7 @@ class HashTable {
         this.size--;
     }
     
-    sort(key) {
+    sort(key, reverse) {
         let temp;
         for (let i = 0; i < Object.keys(this.values).length - 1; i++) {
             for (let j = 1; j < Object.keys(this.values).length - i; j++) {
@@ -91,19 +91,14 @@ class HashTable {
                     this.values[j + 1] = temp;
                 }
             }
-        }
-    }
-    ReverseSort(key) {
-        let temp;
-        for (let i = 0; i < Object.keys(this.values).length - 1; i++) {
-            for (let j = 1; j < Object.keys(this.values).length - i; j++) {
-                if (this.values[j][key] < this.values[j + 1][key]) {
-                    temp = this.values[j];
-                    this.values[j] = this.values[j + 1];
-                    this.values[j + 1] = temp;
-                }
-            }
 
+        }
+        if(reverse) {
+            for (let i = 1, end = Object.keys(this.values).length; i <= end / 2; i++) {
+                temp = this.values[i];
+                this.values[i] = this.values[end - i + 1];
+                this.values[end - i + 1] = temp;
+            }
         }
     }
 }
