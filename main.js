@@ -8,16 +8,16 @@ class HashTable {
   }
 
   addOne(elem) {
-    const hash = ++this.size;
+    const index = ++this.size;
     const has = Object.prototype.hasOwnProperty;
-    if (!has.call(this.values, hash)) {
-      this.values[hash] = {};
+    if (!has.call(this.values, index)) {
+      this.values[index] = {};
     }
     for (const key in elem) {
-      if (!has.call(this.values[hash], key)) {
+      if (!has.call(this.values[index], key)) {
         this.length++;
       }
-      this.values[hash][key] = elem[key];
+      this.values[index][key] = elem[key];
     }
   }
 
@@ -30,26 +30,24 @@ class HashTable {
   searchByValue(value) {
     const find = {};
     if (typeof value === 'string') {
-      for (const hash in this.values) {
-        for (const item in this.values[hash]) {
-          if (this.values[hash][item] === value) {
-            find[hash] = this.values[hash];
+      for (const index in this.values) {
+        for (const item in this.values[index]) {
+          if (this.values[index][item] === value) {
+            find[index] = this.values[index];
           }
         }
       }
     } else if (typeof value === 'object') {
-      for (const hash in this.values) {
-        find[hash] = this.values[hash];
-      }
-      for (const hash in this.values) {
+      loop: for (const index in this.values) {
         for (const keys in value) {
           const has = Object.prototype.hasOwnProperty;
-          if (has.call(this.values[hash], keys)) {
-            if (this.values[hash][keys] !== value[keys]) {
-              delete find[hash];
+          if (has.call(this.values[index], keys)) {
+            if (this.values[index][keys] !== value[keys]) {
+              continue loop;
             }
           } else return null;
         }
+        find[index] = this.values[index];
       }
     }
     if (Object.keys(find).length === 0) return null;
@@ -58,25 +56,25 @@ class HashTable {
 
   searchByKey(key) {
     const find = {};
-    for (const hash in this.values) {
+    for (const index in this.values) {
       const has = Object.prototype.hasOwnProperty;
-      if (has.call(this.values, hash) && has.call(this.values[hash], key)) {
-        find[hash] = this.values[hash][key];
+      if (has.call(this.values, index) && has.call(this.values[index], key)) {
+        find[index] = this.values[index][key];
       }
     }
     if (Object.keys(find).length === 0) return null;
     return find;
   }
 
-  change(hash, key, value) {
+  change(index, key, value) {
     const has = Object.prototype.hasOwnProperty;
-    if (!has.call(this.values, hash)) {
-      this.values[hash] = {};
+    if (!has.call(this.values, index)) {
+      this.values[index] = {};
     }
-    if (!has.call(this.values[hash], key)) {
+    if (!has.call(this.values[index], key)) {
       this.length++;
     }
-    this.values[hash][key] = value;
+    this.values[index][key] = value;
   }
 
   remove(index) {
@@ -95,11 +93,10 @@ class HashTable {
   }
 
   sort(key, reverse) {
-    let temp;
     for (let i = 0; i < Object.keys(this.values).length - 1; i++) {
       for (let j = 1; j < Object.keys(this.values).length - i; j++) {
         if (this.values[j][key] > this.values[j + 1][key]) {
-          temp = this.values[j];
+          const temp = this.values[j];
           this.values[j] = this.values[j + 1];
           this.values[j + 1] = temp;
         }
@@ -107,13 +104,14 @@ class HashTable {
     }
     if (reverse) {
       for (
-        let i = 1, end = Object.keys(this.values).length;
-        i <= end / 2;
-        i++
+        let index = 1, lastIndex = Object.keys(this.values).length;
+        index <= lastIndex / 2;
+        index++
       ) {
-        temp = this.values[i];
-        this.values[i] = this.values[end - i + 1];
-        this.values[end - i + 1] = temp;
+        const reverseIndex = lastIndex - index + 1;
+        const temp = this.values[index];
+        this.values[index] = this.values[reverseIndex];
+        this.values[reverseIndex] = temp;
       }
     }
   }
