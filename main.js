@@ -55,10 +55,12 @@ class HashTable {
     }
 
 searchByKey(key) {
+        key = key.toLowerCase();
         const find = {};
         for (const index in this.values) {
             const has = Object.prototype.hasOwnProperty;
-            if (has.call(this.values, index) && has.call(this.values[index], key)) {
+            console.log(has.call(this.values[index], key));
+            if (has.call(this.values[index], key)) {
                 find[index] = this.values[index];
             }
         }
