@@ -28,31 +28,30 @@ class HashTable {
   }
 
   searchByValue(value) {
-        const find = {};
-        if (typeof value !== 'object') {
-            for (const index in this.values) {
-                for (const item in this.values[index]) {
-                    if (this.values[index][item] === value) {
-                        find[index] = this.values[index];
-                    }
-                }
-            }
-        } else {
-            loop: for (const index in this.values) {
-                for (const keys in value) {
-                    const has = Object.prototype.hasOwnProperty;
-                    if (has.call(this.values[index], keys)) {
-                        if (this.values[index][keys] !== value[keys]) {
-                            continue loop;
-                        }
-                    } else return null;
-                }
-                find[index] = this.values[index];
-            }
+    const find = [];
+    const arr = Object.values(this.values);
+    if (typeof value !== 'object') {
+      for (const item of arr) {
+        if (Object.values(item).indexOf(value) >= 0) {
+          find.push(item);
         }
-        if (Object.keys(find).length === 0) return null;
-        return find;
+      }
+    } else {
+      loop: for (const item of arr) {
+        for (const keys in value) {
+          const has = Object.prototype.hasOwnProperty;
+          if (has.call(item, keys)) {
+            if (item[keys] !== value[keys]) {
+              continue loop;
+            }
+          } else return null;
+        }
+        find.push(item);
+      }
     }
+    if (find.length === 0) return null;
+    return find;
+  }
 
 searchByKey(key) {
         key = key.toLowerCase();
