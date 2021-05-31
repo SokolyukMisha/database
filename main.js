@@ -54,17 +54,17 @@ class HashTable {
         return find;
     }
 
-  searchByKey(key) {
-    const find = {};
-    for (const index in this.values) {
-      const has = Object.prototype.hasOwnProperty;
-      if (has.call(this.values, index) && has.call(this.values[index], key)) {
-        find[index] = this.values[index][key];
-      }
+searchByKey(key) {
+        const find = {};
+        for (const index in this.values) {
+            const has = Object.prototype.hasOwnProperty;
+            if (has.call(this.values, index) && has.call(this.values[index], key)) {
+                find[index] = this.values[index];
+            }
+        }
+        if (Object.keys(find).length === 0) return null;
+        return find;
     }
-    if (Object.keys(find).length === 0) return null;
-    return find;
-  }
 
   change(index, key, value) {
     const has = Object.prototype.hasOwnProperty;
