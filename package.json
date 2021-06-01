@@ -25,3 +25,8 @@
     "url": "git+https://github.com/SokolyukMisha/database"
   }
 }
+{
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
+  }
+}
