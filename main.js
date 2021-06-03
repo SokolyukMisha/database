@@ -121,3 +121,5 @@ searchByKey(key) {
     this.addMany(Object.values(obj.values));
   }
 }
+
+module.exports = HashTable;
