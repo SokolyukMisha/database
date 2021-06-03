@@ -32,7 +32,7 @@ class HashTable {
     const arr = Object.values(this.values);
     if (typeof value !== 'object') {
       for (const item of arr) {
-        if (Object.values(item).indexOf(value) >= 0) {
+        if (Object.values(item).includes(value)) {
           find.push(item);
         }
       }
