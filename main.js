@@ -95,11 +95,15 @@ searchByKey(key) {
 
   sort(key, reverse) {
     for (let i = 0; i < Object.keys(this.values).length - 1; i++) {
-      for (let j = 1; j < Object.keys(this.values).length - i; j++) {
-        if (this.values[j][key] > this.values[j + 1][key]) {
-          const temp = this.values[j];
-          this.values[j] = this.values[j + 1];
-          this.values[j + 1] = temp;
+      for (
+        let index = 1;
+        index < Object.keys(this.values).length - i;
+        index++
+      ) {
+        if (this.values[index][key] > this.values[index + 1][key]) {
+          const temp = this.values[index];
+          this.values[index] = this.values[index + 1];
+          this.values[index + 1] = temp;
         }
       }
     }
