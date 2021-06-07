@@ -78,18 +78,13 @@ searchByKey(key) {
     this.values[index][key] = value;
   }
 
-  remove(index) {
+   remove(index) {
     this.length -= Object.keys(this.values[index]).length;
-    for (let i = index; i <= this.size; i++) {
-      this.values[-i] = this.values[i];
-    }
     delete this.values[index];
-    for (let i = index; i < this.size; i++) {
-      this.values[i] = this.values[-(i + 1)];
-      delete this.values[-i];
+    for(let i = index; i< this.size; i++){
+      this.values[i] = this.values[i+1];
     }
     delete this.values[this.size];
-    delete this.values[-this.size];
     this.size--;
   }
 
