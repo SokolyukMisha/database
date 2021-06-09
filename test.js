@@ -35,7 +35,6 @@ TB.sort('name', 1);
 console.log(TB);
 
 
-//concatenation
 const table = new HashTable();
 
 table.addMany([
@@ -46,5 +45,9 @@ table.addMany([
   { name: 'Vanya', Number: +380955396374, age: 18 },
 ]);
 
+//intersection
+HashTable.intersection(TB, table);
+
+//concatenation
 TB.concatenation(table);
 console.log(TB);
