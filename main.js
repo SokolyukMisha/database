@@ -79,8 +79,8 @@ searchByKey(key) {
   }
 
    remove(index) {
-    if(!Object.keys(this.values).includes(index))
-     return console.log('there is no such index in table');
+    if (!Object.keys(this.values).includes(index))
+      return console.log('there is no such index in table');
     this.length -= Object.keys(this.values[index]).length;
     delete this.values[index];
     for(let i = index; i< this.size; i++){
@@ -120,6 +120,18 @@ searchByKey(key) {
 
   concatenation(obj) {
     this.addMany(Object.values(obj.values));
+  }
+  
+  static intersection(obj1, obj2) {
+    const result = [];
+    const arr1 = Object.values(obj1.values);
+    for (const item of arr1) {
+      const arr2 = Object.values(obj2.values);
+      for (const elem of arr2) {
+        if (JSON.stringify(elem) === JSON.stringify(item)) result.push(item);
+      }
+    }
+    return console.log(result);
   }
 }
 
