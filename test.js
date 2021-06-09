@@ -48,6 +48,9 @@ table.addMany([
 //intersection
 HashTable.intersection(TB, table);
 
+//difference
+HashTable.difference(TB, table);
+
 //concatenation
 TB.concatenation(table);
 console.log(TB);
