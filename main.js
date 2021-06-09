@@ -122,10 +122,10 @@ searchByKey(key) {
     this.addMany(Object.values(obj.values));
   }
   
-  static intersection(obj1, obj2) {
+  static intersection(ht1, ht2) {
     const result = [];
-    const arr1 = Object.values(obj1.values);
-    const arr2 = Object.values(obj2.values);
+    const arr1 = Object.values(ht1.values);
+    const arr2 = Object.values(ht2.values);
     for (const item of arr1) {
       for (const elem of arr2) {
         if (JSON.stringify(elem) === JSON.stringify(item)) result.push(item);
@@ -134,10 +134,10 @@ searchByKey(key) {
     return console.log(result);
   }
   
-   static difference(obj1, obj2) {
+   static difference(ht1, ht2) {
     const result = [];
-    const arr1 = Object.values(obj1.values);
-    const arr2 = Object.values(obj2.values);
+    const arr1 = Object.values(ht1.values);
+    const arr2 = Object.values(ht2.values);
     loop: for (const item of arr1) {
       for (const elem of arr2) {
         if (JSON.stringify(elem) === JSON.stringify(item)) continue loop;
