@@ -125,11 +125,24 @@ searchByKey(key) {
   static intersection(obj1, obj2) {
     const result = [];
     const arr1 = Object.values(obj1.values);
+    const arr2 = Object.values(obj2.values);
     for (const item of arr1) {
-      const arr2 = Object.values(obj2.values);
       for (const elem of arr2) {
         if (JSON.stringify(elem) === JSON.stringify(item)) result.push(item);
       }
+    }
+    return console.log(result);
+  }
+  
+   static difference(obj1, obj2) {
+    const result = [];
+    const arr1 = Object.values(obj1.values);
+    const arr2 = Object.values(obj2.values);
+    loop: for (const item of arr1) {
+      for (const elem of arr2) {
+        if (JSON.stringify(elem) === JSON.stringify(item)) continue loop;
+      }
+      result.push(item);
     }
     return console.log(result);
   }
