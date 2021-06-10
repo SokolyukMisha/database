@@ -39,7 +39,7 @@ class HashTable {
             if (item[keys] !== value[keys]) {
               continue loop;
             }
-          } else return null;
+          } else continue loop;
         }
         find.push(item);
       }
@@ -48,12 +48,12 @@ class HashTable {
     return find;
   }
 
-searchByKey(key) {
+  searchByKey(key) {
     key = key.toLowerCase();
     const find = [];
     const arr = Object.values(this.values);
+    const has = Object.prototype.hasOwnProperty;
     for (const item of arr) {
-      const has = Object.prototype.hasOwnProperty;
       if (has.call(item, key)) {
         find.push(item);
       }
@@ -86,11 +86,11 @@ searchByKey(key) {
   }
 
   sort(key, reverse) {
-    for (let i = 0; i < Object.keys(this.values).length - 1; i++) {
+    for (let i = 0; i < this.size - 1; i++) {
       for (
-        let index = 1;
-        index < Object.keys(this.values).length - i;
-        index++
+          let index = 1;
+          index < this.size - i;
+          index++
       ) {
         if (this.values[index][key] > this.values[index + 1][key]) {
           const temp = this.values[index];
@@ -101,9 +101,9 @@ searchByKey(key) {
     }
     if (reverse) {
       for (
-        let index = 1, lastIndex = Object.keys(this.values).length;
-        index <= lastIndex / 2;
-        index++
+          let index = 1, lastIndex = this.size;
+          index <= lastIndex / 2;
+          index++
       ) {
         const reverseIndex = lastIndex - index + 1;
         const temp = this.values[index];
