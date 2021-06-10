@@ -9,14 +9,9 @@ class HashTable {
 
   addOne(elem) {
     const index = ++this.size;
-    const has = Object.prototype.hasOwnProperty;
-    if (!has.call(this.values, index)) {
-      this.values[index] = {};
-    }
+    this.values[index] = {};
     for (const key in elem) {
-      if (!has.call(this.values[index], key)) {
-        this.length++;
-      }
+      this.length++;
       this.values[index][key] = elem[key];
     }
   }
