@@ -74,7 +74,7 @@ searchByKey(key) {
   }
 
    remove(index) {
-    if (!Object.keys(this.values).includes(index))
+    if (!Object.keys(this.values).includes(index).toString())
       return console.log('there is no such index in table');
     this.length -= Object.keys(this.values[index]).length;
     delete this.values[index];
